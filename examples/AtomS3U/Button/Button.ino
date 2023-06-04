@@ -13,13 +13,13 @@ Press button to display the corresponding output on the screen and
 USBserial. 按下按键，在屏幕和串口上显示相应输出
 */
 #include <M5AtomS3.h>
-/* After M5AtomS3 is started or reset
-  the program in the setUp () function will be run, and this part will only be
-  run once. 在 M5AtomS3
-  启动或者复位后，即会开始执行setup()函数中的程序，该部分只会执行一次。 */
+/* After M5AtomS3U is started or reset the program in the setUp ()
+  function will be run, and this part will only be run once.
+  在M5AtomS3U启动或者复位后，即会开始执行setup()函数中的程序，该部分只会执行一次。
+*/
 void setup() {
     M5.begin(false, true, false, false);  // Init M5AtomS3U.  初始化 M5AtomS3U
-    M5.Lcd.println("Pls Press Btn");
+    USBSerial.println("Please Press Button");
 }
 
 /* After the program in setup() runs, it runs the program in loop()
@@ -30,6 +30,5 @@ void loop() {
     M5.update();  // Read the press state of the key.  读取按键 A, B, C 的状态
     if (M5.Btn.wasReleased() || M5.Btn.pressedFor(1000)) {
         USBSerial.print('A');
-        M5.Lcd.print("A");
     }
 }

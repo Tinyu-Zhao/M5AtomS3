@@ -20,7 +20,7 @@ LED colour switching after burning program.
 void setup() {
     M5.begin(false, true, false,
              true);  // Init M5AtomS3U.  初始化 M5AtomS3U
-    USBSerial.println("Pls Press Btn change color");
+    USBSerial.println("Please Press Button Change The Color");
 }
 
 /* After the program in setup() runs, it runs the program in loop()
@@ -28,13 +28,16 @@ The loop() function is an infinite loop in which the program runs repeatedly
 在setup()函数中的程序执行完后，会接着执行loop()函数中的程序
 loop()函数是一个死循环，其中的程序会不断的重复运行 */
 void loop() {
-    M5.dis.drawpix(0xff0000);
-    M5.dis.show();
-    delay(500);
-    M5.dis.drawpix(0x00ff00);
-    M5.dis.show();
-    delay(500);
-    M5.dis.drawpix(0x0000ff);
-    M5.dis.show();
-    delay(500);
+    M5.update();
+    if (M5.Btn.wasReleased() || M5.Btn.pressedFor(1000)) {
+        M5.dis.drawpix(0xff0000);
+        M5.dis.show();
+        delay(500);
+        M5.dis.drawpix(0x00ff00);
+        M5.dis.show();
+        delay(500);
+        M5.dis.drawpix(0x0000ff);
+        M5.dis.show();
+        delay(500);
+    }
 }
